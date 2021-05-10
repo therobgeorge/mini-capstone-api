@@ -1,0 +1,4 @@
+require 'http'
+
+sytem "clear"
+
