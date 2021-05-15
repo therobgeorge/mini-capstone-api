@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
     products = Product.all 
     if params[:search]
       products = Product.where("name iLike ?", "%#{params[:search]}%")
-    elsif params[:sort] = "price"
+    elsif params[:sort] == "price"
       products = products.order(:price)
     end
     render json: products
