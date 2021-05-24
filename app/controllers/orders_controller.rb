@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user
+
   def index
     orders = Order.all
     render json: orders
@@ -12,7 +14,7 @@ class OrdersController < ApplicationController
       )
 
     order.subtotal = order.qunatity * order.product.price
-    order.tax = order.subtotal * .09
+    order.tax = order.subtotal * 0.09
     order.total = order.tax + order.subtotal
     if order.save
       render json: order
