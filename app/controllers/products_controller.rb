@@ -2,17 +2,24 @@ class ProductsController < ApplicationController
   before_action :authenticate_admin, except: [:index, :show]
   
   def index 
-    if current_user
-      products = Product.all 
+    products = Product.all 
+    
+    if params[:category]
+      category = category.find_by("name iLike ?", params[category]
+      products = category.products
+    end 
+
     # if params[:search]
     #   products = Product.where("name iLike ?", "%#{params[:search]}%")
     # elsif params[:sort] == "price"
     #   products = products.order(:price)
     # end
-      render json: {current_user: current_user, products: products}
-    else
-      render json: [], status: :unauthorized
-    end 
+    #   render json: {current_user: current_user, products: products}
+    # else
+    #   render json: [], status: :unauthorized
+    # end 
+      
+    render json: products
   end
 
   def create
